@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://openai-function-all.vercel.app/</loc>
+         <loc>https://openai-function-call.vercel.app/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://openai-function-all.vercel.app/chat-completion/</loc>
+         <loc>https://openai-function-call.vercel.app/chat-completion/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://openai-function-all.vercel.app/help/</loc>
+         <loc>https://openai-function-call.vercel.app/help/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://openai-function-all.vercel.app/multitask/</loc>
+         <loc>https://openai-function-call.vercel.app/multitask/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://openai-function-all.vercel.app/openai_schema/</loc>
+         <loc>https://openai-function-call.vercel.app/openai_schema/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://openai-function-all.vercel.app/pipeline-example/</loc>
+         <loc>https://openai-function-call.vercel.app/pipeline-example/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://openai-function-all.vercel.app/examples/search/</loc>
+         <loc>https://openai-function-call.vercel.app/examples/search/</loc>
          <lastmod>2023-07-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
