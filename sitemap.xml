@@ -21,6 +21,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://openai-function-call.onrender.com/philosophy/</loc>
+         <lastmod>2023-07-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://openai-function-call.onrender.com/pipeline-example/</loc>
          <lastmod>2023-07-09</lastmod>
          <changefreq>daily</changefreq>
