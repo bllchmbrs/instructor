@@ -19,7 +19,7 @@
     
     
       
-        <title>Automated Dataframe Extraction - OpenAI Function call</title>
+        <title>Example: Automated Dataframe Extraction - OpenAI Function call</title>
       
     
     
@@ -50,7 +50,7 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Automated Dataframe Extraction - OpenAI Function call" >
+        <meta  property="og:title"  content="Example: Automated Dataframe Extraction - OpenAI Function call" >
       
         <meta  property="og:description"  content="None" >
       
@@ -66,7 +66,7 @@
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Automated Dataframe Extraction - OpenAI Function call" >
+        <meta  name="twitter:title"  content="Example: Automated Dataframe Extraction - OpenAI Function call" >
       
         <meta  name="twitter:description"  content="None" >
       
@@ -124,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Automated Dataframe Extraction
+              Example: Automated Dataframe Extraction
             
           </span>
         </div>
@@ -337,7 +337,7 @@
   
     <li class="md-nav__item">
       <a href="../" class="md-nav__link">
-        Table of contents
+        Example applications
       </a>
     </li>
   
@@ -351,7 +351,7 @@
   
     <li class="md-nav__item">
       <a href="../search/" class="md-nav__link">
-        Segmented Search
+        Example: Segmented Search
       </a>
     </li>
   
@@ -365,7 +365,7 @@
   
     <li class="md-nav__item">
       <a href="../planning-tasks/" class="md-nav__link">
-        One shot Query Planning
+        Example: One shot Query Planning
       </a>
     </li>
   
@@ -379,7 +379,7 @@
   
     <li class="md-nav__item">
       <a href="../recursive/" class="md-nav__link">
-        Recursive Schemas
+        Example: Recursive Schemas
       </a>
     </li>
   
@@ -393,7 +393,7 @@
   
     <li class="md-nav__item">
       <a href="../exact_citations/" class="md-nav__link">
-        Exact Citations
+        Example: Exact Citations
       </a>
     </li>
   
@@ -416,12 +416,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Automated Dataframe Extraction
+          Example: Automated Dataframe Extraction
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Automated Dataframe Extraction
+        Example: Automated Dataframe Extraction
       </a>
       
         
@@ -542,6 +542,10 @@
 
 <h1 id="example-converting-text-into-dataframes">Example: Converting Text into Dataframes</h1>
 <p>In this example, we'll demonstrate how to convert a text into dataframes using OpenAI Function Call. We will define the necessary data structures using Pydantic and show how to convert the text into dataframes.</p>
+<div class="admonition note">
+<p class="admonition-title">Motivation</p>
+<p>Often times when we parse data we have an opportunity to extract structured data, what if we could extract an arbitrary number of tables with arbitray schemas? By pulling out dataframes we could write tables or csv files and attach them to our retrived data.</p>
+</div>
 <h2 id="defining-the-data-structures">Defining the Data Structures</h2>
 <p>Let's start by defining the data structures required for this task: <code>RowData</code>, <code>Dataframe</code>, and <code>Database</code>.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">openai_function_call</span> <span class="kn">import</span> <span class="n">OpenAISchema</span>

@@ -21,7 +21,7 @@
     
     
       
-        <title>Segmented Search - OpenAI Function call</title>
+        <title>Example: Segmented Search - OpenAI Function call</title>
       
     
     
@@ -52,7 +52,7 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Segmented Search - OpenAI Function call" >
+        <meta  property="og:title"  content="Example: Segmented Search - OpenAI Function call" >
       
         <meta  property="og:description"  content="None" >
       
@@ -68,7 +68,7 @@
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Segmented Search - OpenAI Function call" >
+        <meta  name="twitter:title"  content="Example: Segmented Search - OpenAI Function call" >
       
         <meta  name="twitter:description"  content="None" >
       
@@ -126,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Segmented Search
+              Example: Segmented Search
             
           </span>
         </div>
@@ -339,7 +339,7 @@
   
     <li class="md-nav__item">
       <a href="../" class="md-nav__link">
-        Table of contents
+        Example applications
       </a>
     </li>
   
@@ -362,12 +362,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Segmented Search
+          Example: Segmented Search
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Segmented Search
+        Example: Segmented Search
       </a>
       
         
@@ -393,8 +393,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-prompt-pipeline" class="md-nav__link">
-    Using the Prompt Pipeline
+  <a href="#calling-completions" class="md-nav__link">
+    Calling Completions
   </a>
   
 </li>
@@ -422,7 +422,7 @@
   
     <li class="md-nav__item">
       <a href="../planning-tasks/" class="md-nav__link">
-        One shot Query Planning
+        Example: One shot Query Planning
       </a>
     </li>
   
@@ -436,7 +436,7 @@
   
     <li class="md-nav__item">
       <a href="../recursive/" class="md-nav__link">
-        Recursive Schemas
+        Example: Recursive Schemas
       </a>
     </li>
   
@@ -450,7 +450,7 @@
   
     <li class="md-nav__item">
       <a href="../exact_citations/" class="md-nav__link">
-        Exact Citations
+        Example: Exact Citations
       </a>
     </li>
   
@@ -464,7 +464,7 @@
   
     <li class="md-nav__item">
       <a href="../autodataframe/" class="md-nav__link">
-        Automated Dataframe Extraction
+        Example: Automated Dataframe Extraction
       </a>
     </li>
   
@@ -511,8 +511,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-prompt-pipeline" class="md-nav__link">
-    Using the Prompt Pipeline
+  <a href="#calling-completions" class="md-nav__link">
+    Calling Completions
   </a>
   
 </li>
@@ -543,7 +543,11 @@
 
 
 <h1 id="example-segmenting-search-queries">Example: Segmenting Search Queries</h1>
-<p>In this example, we will demonstrate how to leverage the <code>MultiTask</code> and <code>enum.Enum</code> features of OpenAI Function Call to segment search queries. We will define the necessary structures using Pydantic and demonstrate how to execute the segmented queries.</p>
+<p>In this example, we will demonstrate how to leverage the <code>MultiTask</code> and <code>enum.Enum</code> features of OpenAI Function Call to segment search queries. We will define the necessary structures using Pydantic and demonstrate how segment query into multiple sub queries and execute them in parallel with <code>asyncio</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Motivation</p>
+<p>Extracting a list of tasks from text is one of the most common examples of using LLMs for 'intent' I can imagine a system like this powering Siri or Alexa fairly soon.</p>
+</div>
 <h2 id="defining-the-structures">Defining the Structures</h2>
 <p>Let's model the problem as breaking down a search request into a list of search queries. We will use an enum to represent different types of searches and take advantage of Python objects to add additional query logic.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">enum</span>
@@ -575,45 +579,50 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Search</span><span class="p">]</span>
 </span></code></pre></div>
 <p>The <code>MultiSearch</code> class has a single attribute, <code>tasks</code>, which is a list of <code>Search</code> objects.</p>
-<h2 id="using-the-prompt-pipeline">Using the Prompt Pipeline</h2>
-<p>To segment a search query, we will use the Prompt Pipeline in OpenAI Function Call. We can define a function that takes a string and returns segmented search queries using the <code>MultiSearch</code> class.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">openai</span>
+<p>This pattern is so common that we've added a helper function <code>MultiTask</code> to makes this simpler </p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">openai_function_call.dsl</span> <span class="kn">import</span> <span class="n">MultiTask</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultiSearch</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-0613&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">functions</span><span class="o">=</span><span class="p">[</span><span class="n">MultiSearch</span><span class="o">.</span><span class="n">openai_schema</span><span class="p">],</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">function_call</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">MultiSearch</span><span class="o">.</span><span class="n">openai_schema</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]},</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="p">{</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Consider the data below: &#39;</span><span class="se">\n</span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&#39; and segment it into multiple search queries&quot;</span><span class="p">,</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            <span class="p">},</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="p">],</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="p">)</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="k">return</span> <span class="n">MultiSearch</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">MultiSearch</span> <span class="o">=</span> <span class="n">MultiTask</span><span class="p">(</span><span class="n">Search</span><span class="p">)</span>
 </span></code></pre></div>
-<p>The <code>segment</code> function takes a string <code>data</code> and creates a completion using the Prompt Pipeline. It prompts the model to segment the data into multiple search queries and returns the result as a <code>MultiSearch</code> object.</p>
+<h2 id="calling-completions">Calling Completions</h2>
+<p>To segment a search query, we will use the base openai api. We can define a function that takes a string and returns segmented search queries using the <code>MultiSearch</code> class.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">openai</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultiSearch</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-0613&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">functions</span><span class="o">=</span><span class="p">[</span><span class="n">MultiSearch</span><span class="o">.</span><span class="n">openai_schema</span><span class="p">],</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">function_call</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">MultiSearch</span><span class="o">.</span><span class="n">openai_schema</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]},</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="p">{</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Consider the data below: &#39;</span><span class="se">\n</span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&#39; and segment it into multiple search queries&quot;</span><span class="p">,</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>            <span class="p">},</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="p">],</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="n">max_tokens</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="p">)</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">return</span> <span class="n">MultiSearch</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The <code>segment</code> function takes a string <code>data</code> and creates a completion. It prompts the model to segment the data into multiple search queries and returns the result as a <code>MultiSearch</code> object.</p>
 <h2 id="evaluating-an-example">Evaluating an Example</h2>
 <p>Let's evaluate an example by segmenting a search query and executing the segmented queries.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">asyncio</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">queries</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="s2">&quot;Please send me the video from last week about the investment case study and also documents about your GDPR policy?&quot;</span><span class="p">)</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">execute_queries</span><span class="p">(</span><span class="n">queries</span><span class="p">:</span> <span class="n">Multisearch</span><span class="p">):</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="o">.</span><span class="n">tasks</span><span class="p">])</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">execute_queries</span><span class="p">())</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">asyncio</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">queries</span> <span class="o">=</span> <span class="n">segment</span><span class="p">(</span><span class="s2">&quot;Please send me the video from last week about the investment case study and also documents about your GDPR policy?&quot;</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">execute_queries</span><span class="p">(</span><span class="n">queries</span><span class="p">:</span> <span class="n">Multisearch</span><span class="p">):</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">q</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">queries</span><span class="o">.</span><span class="n">tasks</span><span class="p">])</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">execute_queries</span><span class="p">())</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">loop</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </span></code></pre></div>
 <p>In this example, we use the <code>segment</code> function to segment the search query. We then use <code>asyncio</code> to asynchronously execute the queries using the <code>execute</code> method defined in the <code>Search</code> class.</p>
 <p>The output will be:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Searching for `Please send me the video from last week about the investment case study` with query `Please send me the video from last week about the investment case study` using `SearchType.VIDEO`
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Searching for `also documents about your GDPR policy?` with query `also documents about your GDPR policy?` using `SearchType.EMAIL`
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Searching for `Please send me the video from last week about the investment case study` with query `Please send me the video from last week about the investment case study` using `SearchType.VIDEO`
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Searching for `also documents about your GDPR policy?` with query `also documents about your GDPR policy?` using `SearchType.EMAIL`
 </span></code></pre></div>
 <p>This demonstrates how to use the Prompt Pipeline to segment search queries and execute them asynchronously.</p>
 
