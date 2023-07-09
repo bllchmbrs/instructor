@@ -26,6 +26,31 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://openai-function-call.onrender.com/examples/</loc>
+         <lastmod>2023-07-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://openai-function-call.onrender.com/examples/autodataframe/</loc>
+         <lastmod>2023-07-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://openai-function-call.onrender.com/examples/exact_citations/</loc>
+         <lastmod>2023-07-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://openai-function-call.onrender.com/examples/planning-tasks/</loc>
+         <lastmod>2023-07-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://openai-function-call.onrender.com/examples/recursive/</loc>
+         <lastmod>2023-07-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://openai-function-call.onrender.com/examples/search/</loc>
          <lastmod>2023-07-09</lastmod>
          <changefreq>daily</changefreq>

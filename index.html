@@ -402,8 +402,78 @@
   
   
     <li class="md-nav__item">
+      <a href="examples/" class="md-nav__link">
+        Table of contents
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="examples/search/" class="md-nav__link">
         Segmented Search
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/planning-tasks/" class="md-nav__link">
+        One shot Query Planning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/recursive/" class="md-nav__link">
+        Recursive Schemas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/exact_citations/" class="md-nav__link">
+        Exact Citations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="examples/autodataframe/" class="md-nav__link">
+        Automated Dataframe Extraction
       </a>
     </li>
   
@@ -495,26 +565,23 @@
 
 
 <h1 id="welcome-to-openai-function-call">Welcome to OpenAI Function Call</h1>
-<p>We offer a minially invasive extention of <code>Pydantic.BaseModel</code> named <code>OpenAISchema</code>. It only has two methods, one to generate the correct schema, and one to produce the class from the completion.</p>
-<p>This library is more, so a list of examples and a helper class so I'll keep the example as just structured extraction.</p>
-<p>If the OpenAI is a chef's knife of code, I hope you sell you a nice handle which comes with a little pamplet of cuttign techniques.</p>
-<p>It leverages the data validation capabilities of the Pydantic library to handle output parsing in a more structured and reliable manner.</p>
-<p>If you have any feedback, leave an issue or hit me up on <a href="https://twitter.com/jxnlco">twitter</a>.</p>
-<p>If you're looking for something more batteries included I strongly recommend <a href="https://www.askmarvin.ai/">MarvinAI</a> which offers a high level api but does not provide as much access to prompting.</p>
+<p>OpenAI Function Call is a library that provides a minimal and non-intrusive extension to the <code>Pydantic.BaseModel</code> class called <code>OpenAISchema</code>. It offers two main methods: <code>openai_schema</code> for generating the correct schema and <code>from_response</code> for creating an instance of the class from the completion result.</p>
+<p>The library primarily focuses on showcasing examples and providing a helper class, so I'll keep the example as a simple structured extraction.</p>
+<p>If OpenAI is like a chef's knife for code, I aim to provide you with a nice handle and a little booklet of cutting techniques. OpenAI Function Call leverages the data validation capabilities of the Pydantic library to handle output parsing in a structured and reliable manner.</p>
+<p>If you have any feedback or need assistance, feel free to leave an issue or reach out to me on <a href="https://twitter.com/jxnlco">Twitter</a>.</p>
+<p>If you're looking for a more comprehensive solution with batteries included, I highly recommend <a href="https://www.askmarvin.ai/">MarvinAI</a>. MarvinAI provides a high-level API but doesn't offer as much access to prompting.</p>
 <div class="admonition tip">
 <p class="admonition-title">Just rip it out!</p>
-<p>If you don't want to install dependencies. I recommend literally ripping the <code>function_calls.py</code> into your own codebase. <a href="https://github.com/jxnl/openai_function_call/blob/main/openai_function_call/function_calls.py">[source code]</a></p>
+<p>If you don't want to install dependencies, you can literally take the <code>function_calls.py</code> file from the library's source code and add it to your own codebase. You can find the <a href="https://github.com/jxnl/openai_function_call/blob/main/openai_function_call/function_calls.py">source code here</a>.</p>
 </div>
 <h2 id="installation">Installation</h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">openai_function_call</span>
+<p>You can install OpenAI Function Call using pip:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>openai_function_call
 </span></code></pre></div>
 <h2 id="usage">Usage</h2>
-<p>Below are examples showcasing the use of function calls and schemas with OpenAI and Pydantic. In later docs we'll go over a wide array of more creative uses.</p>
+<p>Below are some examples that demonstrate the usage of function calls and schemas with OpenAI and Pydantic. In subsequent documentation, we will explore more creative use cases.</p>
 <h3 id="example-1-extraction">Example 1: Extraction</h3>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Prompt are now sourced from docstrings and descriptions, so write clear and descriptive documentation!</p>
-</div>
+<p>Prompts are now sourced from docstrings and field descriptions, so it's important to write clear and descriptive documentation for your schemas.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span> <span class="nn">openai</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">openai_function_call</span> <span class="kn">import</span> <span class="n">OpenAISchema</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
@@ -522,7 +589,7 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">class</span> <span class="nc">UserDetails</span><span class="p">(</span><span class="n">OpenAISchema</span><span class="p">):</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Details of a user&quot;&quot;&quot;</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;users&#39;s full name&quot;</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User&#39;s full name&quot;</span><span class="p">)</span>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
@@ -536,7 +603,7 @@
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="p">)</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
 </span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">user_details</span> <span class="o">=</span> <span class="n">UserDetails</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nb">print</span><span class="p">(</span><span class="n">user_details</span><span class="p">)</span>  <span class="c1"># name=&quot;John Doe&quot;, age=30</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nb">print</span><span class="p">(</span><span class="n">user_details</span><span class="p">)</span>  <span class="c1"># UserDetails(name=&#39;John Doe&#39;, age=30)</span>
 </span></code></pre></div>
 <h3 id="example-2-function-calls">Example 2: Function Calls</h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">openai</span>
