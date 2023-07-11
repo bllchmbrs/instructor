@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://openai-function-call.onrender.com/pipeline-example/">
+        <link rel="canonical" href="https://openai-function-call.onrender.com/writing-prompts/">
       
       
         <link rel="prev" href="../multitask/">
@@ -23,7 +23,7 @@
     
     
       
-        <title>Introduction: Pipeline API - OpenAI Function Call Library</title>
+        <title>Introduction: Writing Prompts - OpenAI Function Call Library</title>
       
     
     
@@ -66,11 +66,11 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Introduction: Pipeline API - OpenAI Function Call Library" >
+        <meta  property="og:title"  content="Introduction: Writing Prompts - OpenAI Function Call Library" >
       
         <meta  property="og:description"  content="Enhancing OpenAI function calling with Pydantic" >
       
-        <meta  property="og:image"  content="https://openai-function-call.onrender.com/assets/images/social/pipeline-example.png" >
+        <meta  property="og:image"  content="https://openai-function-call.onrender.com/assets/images/social/writing-prompts.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -78,15 +78,15 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://openai-function-call.onrender.com/pipeline-example/" >
+        <meta  property="og:url"  content="https://openai-function-call.onrender.com/writing-prompts/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Introduction: Pipeline API - OpenAI Function Call Library" >
+        <meta  name="twitter:title"  content="Introduction: Writing Prompts - OpenAI Function Call Library" >
       
         <meta  name="twitter:description"  content="Enhancing OpenAI function calling with Pydantic" >
       
-        <meta  name="twitter:image"  content="https://openai-function-call.onrender.com/assets/images/social/pipeline-example.png" >
+        <meta  name="twitter:image"  content="https://openai-function-call.onrender.com/assets/images/social/writing-prompts.png" >
       
     
     
@@ -105,7 +105,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#using-the-chatcompletion-pipeline" class="md-skip">
+        <a href="#writing-prompts-with-chatcompletion" class="md-skip">
           Skip to content
         </a>
       
@@ -140,7 +140,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction: Pipeline API
+              Introduction: Writing Prompts
             
           </span>
         </div>
@@ -368,12 +368,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Introduction: Pipeline API
+          Introduction: Writing Prompts
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Introduction: Pipeline API
+        Introduction: Writing Prompts
       </a>
       
         
@@ -441,7 +441,7 @@
   
     <li class="md-nav__item">
       <a href="../chat-completion/" class="md-nav__link">
-        Message Templates
+        Prompting Templates
       </a>
     </li>
   
@@ -668,10 +668,27 @@
   
 
 
-<h1 id="using-the-chatcompletion-pipeline">Using the ChatCompletion Pipeline</h1>
+<h1 id="writing-prompts-with-chatcompletion">Writing prompts with <code>ChatCompletion</code></h1>
 <p>The ChatCompletion pipeline API provides a convenient way to build prompts with clear instructions and structure. It helps avoid the need to remember best practices for wording and prompt construction. This documentation will demonstrate an example pipeline and guide you through the process of using it.</p>
+<p>Our goals are to:</p>
+<ol>
+<li>Define some best practices with a light abstraction over a chat message</li>
+<li>Allow the pipeline to be intuitive and readable.</li>
+<li>Abstract the output shape and deserialization to better usability</li>
+</ol>
 <h2 id="example-pipeline">Example Pipeline</h2>
 <p>We will begin by defining a task to segment queries and add instructions using the prompt pipeline API.</p>
+<ol>
+<li>We want to define a search object to extract</li>
+<li>We want to extract multiple instances of such an object</li>
+<li>We want to define the pipeline with a set of instructions</li>
+<li>We want to easily call OpenAI and extract the data back out of the competion</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Applications</p>
+<p>Extracted a repeated task out of instructions is a fairly common task.
+Prompting tips have been to define the task clearly, model the output object and provide tips to the llm for better performance. Something like this can be used to power agents like Siri or Alexa in performing multiple tasks in one request. <a href="../examples/search/">Read more</a></p>
+</div>
 <h3 id="designing-the-schema">Designing the Schema</h3>
 <p>First, let's design the schema for our task. In this example, we will have a <code>SearchQuery</code> schema with a single field called <code>query</code>. The <code>query</code> field will represent a detailed, comprehensive, and specific query to be used for semantic search.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">openai_function_call</span> <span class="kn">import</span> <span class="n">OpenAISchema</span><span class="p">,</span> <span class="n">dsl</span>
@@ -692,26 +709,34 @@
 <p>To learn more about the <code>MultiTask</code> functionality, you can refer to the <a href="../multitask/">MultiTask</a> documentation.</p>
 </div>
 <h3 id="building-our-prompts">Building our Prompts</h3>
-<p>Next, let's build our prompts using the pipeline API. We will leverage the features provided by the <code>ChatCompletion</code> class and utilize the <code>|</code> operator to chain different components of our prompt together.</p>
+<p>Next, let's write out prompt using the pipeline style. We will leverage the features provided by the <code>ChatCompletion</code> class and utilize the <code>|</code> operator to chain different components of our prompt together.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">task</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">dsl</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="p">(</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Segmenting Search requests example&quot;</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-0613,</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">max_token</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="o">|</span> <span class="n">dsl</span><span class="o">.</span><span class="n">SystemTask</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">&quot;Segment search results&quot;</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="o">|</span> <span class="n">dsl</span><span class="o">.</span><span class="n">TaggedMessage</span><span class="p">(</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">content</span><span class="o">=</span><span class="s2">&quot;can you send me the data about the video investment and the one about spot the dog?&quot;</span><span class="p">,</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;query&quot;</span><span class="p">,</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="p">)</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="o">|</span> <span class="n">dsl</span><span class="o">.</span><span class="n">TipsMessage</span><span class="p">(</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">tips</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="s2">&quot;Expand query to contain multiple forms of the same word (SSO -&gt; Single Sign On)&quot;</span><span class="p">,</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            <span class="s2">&quot;Use the title to explain what the query should return, but use the query to complete the search&quot;</span><span class="p">,</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="s2">&quot;The query should be detailed, specific, and cast a wide net when possible&quot;</span><span class="p">,</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="p">]</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="p">)</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="o">|</span> <span class="n">SearchResponse</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># Define the completion object (consider this both task and prompt)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">dsl</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="p">(</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Segmenting Search requests example&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-0613,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="n">max_token</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="c1"># SystemTask augments the `task` with &quot;You are a world class ...&quot;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="o">|</span> <span class="n">dsl</span><span class="o">.</span><span class="n">SystemTask</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">&quot;Segment search results&quot;</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="c1"># TaggedMessage wraps content with &lt;query&gt;&lt;/query&gt; to set clear boundaries </span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="c1"># for the data you wish to process</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="o">|</span> <span class="n">dsl</span><span class="o">.</span><span class="n">TaggedMessage</span><span class="p">(</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">content</span><span class="o">=</span><span class="s2">&quot;can you send me the data about the video investment and the one about spot the dog?&quot;</span><span class="p">,</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;query&quot;</span><span class="p">,</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="p">)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="c1"># TipsMessages allows you to pass a list of strings as tips</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="c1"># as a result we can potentially create this list dynamically</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="o">|</span> <span class="n">dsl</span><span class="o">.</span><span class="n">TipsMessage</span><span class="p">(</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="n">tips</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="s2">&quot;Expand query to contain multiple forms of the same word (SSO -&gt; Single Sign On)&quot;</span><span class="p">,</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            <span class="s2">&quot;Use the title to explain what the query should return, but use the query to complete the search&quot;</span><span class="p">,</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>            <span class="s2">&quot;The query should be detailed, specific, and cast a wide net when possible&quot;</span><span class="p">,</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>        <span class="p">]</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="p">)</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="c1"># Last step defines the output model you want to use to parse the results</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="c1"># if no outpout model is defined we revert to the usual openai completion.</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="o">|</span> <span class="n">SearchResponse</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="p">)</span>
 </span></code></pre></div>
 <p>The <code>ChatCompletion</code> class is responsible for model configuration, while the <code>|</code> operator allows us to construct the prompt in a readable manner. We can add <code>Messages</code> or <code>OpenAISchema</code> components to the prompt pipeline using <code>|</code>, and the <code>ChatCompletion</code> class will handle the prompt construction for us.</p>
 <p>In the above example, we:</p>
