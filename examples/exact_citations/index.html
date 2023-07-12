@@ -45,6 +45,8 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../../termynal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -591,6 +593,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpt-engineer/" class="md-nav__link">
+        Creating multiple file programs
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -687,7 +703,7 @@
 <p>Let's start by defining the data structures required for this task: <code>Fact</code> and <code>QuestionAnswer</code>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Prompting as documentation</p>
-<p>Make sure to include detailed and useful docstrings and fields for your class definitions. Naming becomes very important since they are semantically meaninful in the prompt.</p>
+<p>Make sure to include detailed and useful docstrings and fields for your class definitions. Naming becomes very important since they are semantically meaningful in the prompt.</p>
 <ul>
 <li><code>substring_quote</code> performs better than <code>quote</code> since it suggests it should be a substring of the original content.</li>
 <li>Notice that there are instructions on splitting facts in the docstring which will be used by OpenAI</li>
@@ -747,8 +763,8 @@
 <p>The <code>QuestionAnswer</code> class represents a question and its answer. It consists of a <code>question</code> attribute for the question asked and a list of <code>Fact</code> objects in the <code>answer</code> attribute.</p>
 <div class="admonition tip">
 <p class="admonition-title">Embedding computation</p>
-<p>While its not thet best idea to get too crazy with adding 100 methods to your class
-colocating some computation is oftentimes useful, here we implement the substring search directly with the <code>Fact</code> class.</p>
+<p>While it's not the best idea to get too crazy with adding 100 methods to your class
+collocating some computation is oftentimes useful, here we implement the substring search directly with the <code>Fact</code> class.</p>
 </div>
 <h2 id="asking-ai-a-question">Asking AI a Question</h2>
 <p>To ask the AI a question and get back an answer with citations, we can define a function <code>ask_ai</code> that takes a question and context as input and returns a <code>QuestionAnswer</code> object.</p>
@@ -960,6 +976,10 @@ colocating some computation is oftentimes useful, here we implement the substrin
     
     
       <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../termynal.js"></script>
+        
       
     
   </body>

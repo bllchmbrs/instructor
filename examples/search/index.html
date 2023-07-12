@@ -45,6 +45,8 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../../termynal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -591,6 +593,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpt-engineer/" class="md-nav__link">
+        Creating multiple file programs
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -678,7 +694,7 @@
 
 
 <h1 id="example-segmenting-search-queries">Example: Segmenting Search Queries</h1>
-<p>In this example, we will demonstrate how to leverage the <code>MultiTask</code> and <code>enum.Enum</code> features of OpenAI Function Call to segment search queries. We will define the necessary structures using Pydantic and demonstrate how segment query into multiple sub queries and execute them in parallel with <code>asyncio</code>.</p>
+<p>In this example, we will demonstrate how to leverage the <code>MultiTask</code> and <code>enum.Enum</code> features of OpenAI Function Call to segment search queries. We will define the necessary structures using Pydantic and demonstrate how segment queries into multiple sub queries and execute them in parallel with <code>asyncio</code>.</p>
 <div class="admonition tips">
 <p class="admonition-title">Motivation</p>
 <p>Extracting a list of tasks from text is a common use case for leveraging language models. This pattern can be applied to various applications, such as virtual assistants like Siri or Alexa, where understanding user intent and breaking down requests into actionable tasks is crucial. In this example, we will demonstrate how to use OpenAI Function Call to segment search queries and execute them in parallel.</p>
@@ -870,6 +886,10 @@
     
     
       <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../termynal.js"></script>
+        
       
     
   </body>

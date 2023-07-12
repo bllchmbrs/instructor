@@ -45,6 +45,8 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../../termynal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -591,6 +593,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpt-engineer/" class="md-nav__link">
+        Creating multiple file programs
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -738,7 +754,7 @@
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Graph Generation</p>
-<p>Notice that this example produces a flat list of items with dependencies that resemble a graph, while pydantic allows for recursive definitions, its much easier and less confusing for the model to generate flat schemas rather than recursive schemas. If y ou want to see a recursive example see <a href="../recursive/">recursive schemas</a></p>
+<p>Notice that this example produces a flat list of items with dependencies that resemble a graph, while pydantic allows for recursive definitions, it's much easier and less confusing for the model to generate flat schemas rather than recursive schemas. If you want to see a recursive example, see <a href="../recursive/">recursive schemas</a></p>
 </div>
 <h2 id="planning-a-query-plan">Planning a Query Plan</h2>
 <p>Now, let's demonstrate how to plan and execute a query plan using the defined models and the OpenAI API.</p>
@@ -778,7 +794,7 @@
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">No RAG</p>
-<p>While we build the query plan in this example we do not propose a method to actually answer the question. You can implement your own answer function that perhaps makes a retrival and calls openai for retrival augmented generation. That step would also make use of function calls but goes beyond the scope of this example.</p>
+<p>While we build the query plan in this example, we do not propose a method to actually answer the question. You can implement your own answer function that perhaps makes a retrival and calls openai for retrival augmented generation. That step would also make use of function calls but goes beyond the scope of this example.</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="s1">&#39;query_graph&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;dependancies&#39;</span><span class="p">:</span> <span class="p">[],</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -801,7 +817,7 @@
 <p>In the above code, we define a <code>query_planner</code> function that takes a question as input and generates a query plan using the OpenAI API.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>In this example, we demonstrated how to use the OpenAI Function Call <code>ChatCompletion</code> model to plan and execute a query plan using a question-answering system. We defined the necessary structures using Pydantic, created a query planner function. </p>
-<p>If you want to see multiple version of this style of code please visit </p>
+<p>If you want to see multiple versions of this style of code, please visit:</p>
 <ol>
 <li><a href="https://github.com/jxnl/openai_function_call/blob/main/examples/query_planner_execution/query_planner_execution.py">query planning example</a></li>
 <li><a href="https://github.com/jxnl/openai_function_call/blob/main/examples/task_planner/task_planner_topological_sort.py">task planning with topo sort</a></li>
@@ -918,6 +934,10 @@
     
     
       <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../termynal.js"></script>
+        
       
     
   </body>

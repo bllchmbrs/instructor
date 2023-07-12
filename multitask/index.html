@@ -45,6 +45,8 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../termynal.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -584,6 +586,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/gpt-engineer/" class="md-nav__link">
+        Creating multiple file programs
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -664,7 +680,7 @@
 
 
 <h1 id="multitask">MultiTask</h1>
-<p>Defining a task and creating a list of classes is a common enough pattern that we define a helper function <code>MultiTask</code> that dynamitcally creates a new schema that has a task attribute defined as a list of the task subclass, it including some prebuild prompts and allows us to avoid writing some extra code.</p>
+<p>Defining a task and creating a list of classes is a common enough pattern that we define a helper function <code>MultiTask</code> that dynamically creates a new schema that has a task attribute defined as a list of the task subclass, including some prebuilt prompts and allows us to avoid writing some extra code.</p>
 <div class="admonition example">
 <p class="admonition-title">Extending user details</p>
 <p>Using the previous example with extracting <code>UserDetails</code> we might want to extract multiple users rather than a single user, <code>MultiTask</code> makes it easy!</p>
@@ -1053,6 +1069,10 @@ then the description is set to <code>Correct segmentation of</code>{subtask_clas
     
     
       <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../termynal.js"></script>
+        
       
     
   </body>

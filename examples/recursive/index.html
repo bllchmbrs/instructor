@@ -45,6 +45,8 @@
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../../termynal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -591,6 +593,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpt-engineer/" class="md-nav__link">
+        Creating multiple file programs
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -683,7 +699,7 @@
 <p>We will use Pydantic to define the necessary data structures representing the directory tree and its nodes. We have two classes, <code>Node</code> and <code>DirectoryTree</code>, which are used to model individual nodes and the entire directory tree, respectively.</p>
 <div class="admonition warning">
 <p class="admonition-title">Flat is better than nested</p>
-<p>While its easier to model thing as nested returning flat items with depedencies tends to yield better results. for a flat example check out <a href="../planning-tasks/">planning tasks</a> where we model a query plan as a dag.</p>
+<p>While it's easier to model things as nested, returning flat items with dependencies tends to yield better results. For a flat example, check out <a href="../planning-tasks/">planning tasks</a> where we model a query plan as a dag.</p>
 </div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">enum</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -928,6 +944,10 @@
     
     
       <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../../termynal.js"></script>
+        
       
     
   </body>

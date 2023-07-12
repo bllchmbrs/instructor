@@ -45,6 +45,8 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../termynal.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -744,6 +746,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/gpt-engineer/" class="md-nav__link">
+        Creating multiple file programs
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1286,7 +1302,8 @@ generate a chat response from the OpenAI API.</p>
 <span class="normal"><a href="#__codelineno-0-162">162</a></span>
 <span class="normal"><a href="#__codelineno-0-163">163</a></span>
 <span class="normal"><a href="#__codelineno-0-164">164</a></span>
-<span class="normal"><a href="#__codelineno-0-165">165</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="k">class</span> <span class="nc">ChatCompletion</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-165">165</a></span>
+<span class="normal"><a href="#__codelineno-0-166">166</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="k">class</span> <span class="nc">ChatCompletion</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">    A chat completion is a collection of messages and configration options that can be used to</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">    generate a chat response from the OpenAI API.</span>
@@ -1431,19 +1448,20 @@ generate a chat response from the OpenAI API.</p>
 </span><span id="__span-0-150"><a id="__codelineno-0-150" name="__codelineno-0-150"></a>        <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </span><span id="__span-0-151"><a id="__codelineno-0-151" name="__codelineno-0-151"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
 </span><span id="__span-0-152"><a id="__codelineno-0-152" name="__codelineno-0-152"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
-</span><span id="__span-0-153"><a id="__codelineno-0-153" name="__codelineno-0-153"></a>
-</span><span id="__span-0-154"><a id="__codelineno-0-154" name="__codelineno-0-154"></a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">acreate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-155"><a id="__codelineno-0-155" name="__codelineno-0-155"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-156"><a id="__codelineno-0-156" name="__codelineno-0-156"></a><span class="sd">        Create a chat response from the OpenAI API asynchronously</span>
-</span><span id="__span-0-157"><a id="__codelineno-0-157" name="__codelineno-0-157"></a>
-</span><span id="__span-0-158"><a id="__codelineno-0-158" name="__codelineno-0-158"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-159"><a id="__codelineno-0-159" name="__codelineno-0-159"></a><span class="sd">            response (OpenAISchema): The response from the OpenAI API</span>
-</span><span id="__span-0-160"><a id="__codelineno-0-160" name="__codelineno-0-160"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-161"><a id="__codelineno-0-161" name="__codelineno-0-161"></a>        <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span>
-</span><span id="__span-0-162"><a id="__codelineno-0-162" name="__codelineno-0-162"></a>        <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">acreate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-163"><a id="__codelineno-0-163" name="__codelineno-0-163"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
-</span><span id="__span-0-164"><a id="__codelineno-0-164" name="__codelineno-0-164"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="k">await</span> <span class="n">completion</span><span class="p">)</span>
-</span><span id="__span-0-165"><a id="__codelineno-0-165" name="__codelineno-0-165"></a>        <span class="k">return</span> <span class="k">await</span> <span class="n">completion</span>
+</span><span id="__span-0-153"><a id="__codelineno-0-153" name="__codelineno-0-153"></a>        <span class="k">return</span> <span class="n">completion</span>
+</span><span id="__span-0-154"><a id="__codelineno-0-154" name="__codelineno-0-154"></a>
+</span><span id="__span-0-155"><a id="__codelineno-0-155" name="__codelineno-0-155"></a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">acreate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-156"><a id="__codelineno-0-156" name="__codelineno-0-156"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-0-157"><a id="__codelineno-0-157" name="__codelineno-0-157"></a><span class="sd">        Create a chat response from the OpenAI API asynchronously</span>
+</span><span id="__span-0-158"><a id="__codelineno-0-158" name="__codelineno-0-158"></a>
+</span><span id="__span-0-159"><a id="__codelineno-0-159" name="__codelineno-0-159"></a><span class="sd">        Returns:</span>
+</span><span id="__span-0-160"><a id="__codelineno-0-160" name="__codelineno-0-160"></a><span class="sd">            response (OpenAISchema): The response from the OpenAI API</span>
+</span><span id="__span-0-161"><a id="__codelineno-0-161" name="__codelineno-0-161"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-162"><a id="__codelineno-0-162" name="__codelineno-0-162"></a>        <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span>
+</span><span id="__span-0-163"><a id="__codelineno-0-163" name="__codelineno-0-163"></a>        <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">acreate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-164"><a id="__codelineno-0-164" name="__codelineno-0-164"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
+</span><span id="__span-0-165"><a id="__codelineno-0-165" name="__codelineno-0-165"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="k">await</span> <span class="n">completion</span><span class="p">)</span>
+</span><span id="__span-0-166"><a id="__codelineno-0-166" name="__codelineno-0-166"></a>        <span class="k">return</span> <span class="k">await</span> <span class="n">completion</span>
 </span></code></pre></div></td></tr></table></div>
         </details>
 
@@ -1612,8 +1630,7 @@ generate a chat response from the OpenAI API.</p>
 
       <details class="quote">
         <summary>Source code in <code>openai_function_call/dsl/completion.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-154">154</a></span>
-<span class="normal"><a href="#__codelineno-0-155">155</a></span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-155">155</a></span>
 <span class="normal"><a href="#__codelineno-0-156">156</a></span>
 <span class="normal"><a href="#__codelineno-0-157">157</a></span>
 <span class="normal"><a href="#__codelineno-0-158">158</a></span>
@@ -1623,18 +1640,19 @@ generate a chat response from the OpenAI API.</p>
 <span class="normal"><a href="#__codelineno-0-162">162</a></span>
 <span class="normal"><a href="#__codelineno-0-163">163</a></span>
 <span class="normal"><a href="#__codelineno-0-164">164</a></span>
-<span class="normal"><a href="#__codelineno-0-165">165</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-154"><a id="__codelineno-0-154" name="__codelineno-0-154"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">acreate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-155"><a id="__codelineno-0-155" name="__codelineno-0-155"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-156"><a id="__codelineno-0-156" name="__codelineno-0-156"></a><span class="sd">    Create a chat response from the OpenAI API asynchronously</span>
-</span><span id="__span-0-157"><a id="__codelineno-0-157" name="__codelineno-0-157"></a>
-</span><span id="__span-0-158"><a id="__codelineno-0-158" name="__codelineno-0-158"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-159"><a id="__codelineno-0-159" name="__codelineno-0-159"></a><span class="sd">        response (OpenAISchema): The response from the OpenAI API</span>
-</span><span id="__span-0-160"><a id="__codelineno-0-160" name="__codelineno-0-160"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-161"><a id="__codelineno-0-161" name="__codelineno-0-161"></a>    <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span>
-</span><span id="__span-0-162"><a id="__codelineno-0-162" name="__codelineno-0-162"></a>    <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">acreate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-163"><a id="__codelineno-0-163" name="__codelineno-0-163"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
-</span><span id="__span-0-164"><a id="__codelineno-0-164" name="__codelineno-0-164"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="k">await</span> <span class="n">completion</span><span class="p">)</span>
-</span><span id="__span-0-165"><a id="__codelineno-0-165" name="__codelineno-0-165"></a>    <span class="k">return</span> <span class="k">await</span> <span class="n">completion</span>
+<span class="normal"><a href="#__codelineno-0-165">165</a></span>
+<span class="normal"><a href="#__codelineno-0-166">166</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-155"><a id="__codelineno-0-155" name="__codelineno-0-155"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">acreate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-156"><a id="__codelineno-0-156" name="__codelineno-0-156"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-0-157"><a id="__codelineno-0-157" name="__codelineno-0-157"></a><span class="sd">    Create a chat response from the OpenAI API asynchronously</span>
+</span><span id="__span-0-158"><a id="__codelineno-0-158" name="__codelineno-0-158"></a>
+</span><span id="__span-0-159"><a id="__codelineno-0-159" name="__codelineno-0-159"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-160"><a id="__codelineno-0-160" name="__codelineno-0-160"></a><span class="sd">        response (OpenAISchema): The response from the OpenAI API</span>
+</span><span id="__span-0-161"><a id="__codelineno-0-161" name="__codelineno-0-161"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-162"><a id="__codelineno-0-162" name="__codelineno-0-162"></a>    <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span>
+</span><span id="__span-0-163"><a id="__codelineno-0-163" name="__codelineno-0-163"></a>    <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">acreate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-164"><a id="__codelineno-0-164" name="__codelineno-0-164"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
+</span><span id="__span-0-165"><a id="__codelineno-0-165" name="__codelineno-0-165"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="k">await</span> <span class="n">completion</span><span class="p">)</span>
+</span><span id="__span-0-166"><a id="__codelineno-0-166" name="__codelineno-0-166"></a>    <span class="k">return</span> <span class="k">await</span> <span class="n">completion</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1689,7 +1707,8 @@ generate a chat response from the OpenAI API.</p>
 <span class="normal"><a href="#__codelineno-0-149">149</a></span>
 <span class="normal"><a href="#__codelineno-0-150">150</a></span>
 <span class="normal"><a href="#__codelineno-0-151">151</a></span>
-<span class="normal"><a href="#__codelineno-0-152">152</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142"></a><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-152">152</a></span>
+<span class="normal"><a href="#__codelineno-0-153">153</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142"></a><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="__span-0-144"><a id="__codelineno-0-144" name="__codelineno-0-144"></a><span class="sd">    Create a chat response from the OpenAI API</span>
 </span><span id="__span-0-145"><a id="__codelineno-0-145" name="__codelineno-0-145"></a>
@@ -1700,6 +1719,7 @@ generate a chat response from the OpenAI API.</p>
 </span><span id="__span-0-150"><a id="__codelineno-0-150" name="__codelineno-0-150"></a>    <span class="n">completion</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </span><span id="__span-0-151"><a id="__codelineno-0-151" name="__codelineno-0-151"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
 </span><span id="__span-0-152"><a id="__codelineno-0-152" name="__codelineno-0-152"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">from_response</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span>
+</span><span id="__span-0-153"><a id="__codelineno-0-153" name="__codelineno-0-153"></a>    <span class="k">return</span> <span class="n">completion</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1722,7 +1742,7 @@ generate a chat response from the OpenAI API.</p>
   </div>
 
 </div><h2 id="messages-types">Messages Types</h2>
-<p>The basis of a message is defined as a <code>dataclass</code>. However we provide helper functions and classes that provide additional functionality in the form of templates. </p>
+<p>The basis of a message is defined as a <code>dataclass</code>. However, we provide helper functions and classes that provide additional functionality in the form of templates. </p>
 
 
 <div class="doc doc-object doc-module">
@@ -3192,6 +3212,10 @@ push the system to behave as a world class algorithm.</p>
     
     
       <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="../termynal.js"></script>
+        
       
     
   </body>
