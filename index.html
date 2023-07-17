@@ -14,14 +14,14 @@
       
       
       
-        <link rel="next" href="openai_schema/">
+        <link rel="next" href="philosophy/">
       
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
-        <title>OpenAI Function Call Library</title>
+        <title>Function Calls - OpenAI Function Call Library</title>
       
     
     
@@ -66,7 +66,7 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Quick Start" >
+        <meta  property="og:title"  content="Function Calls - OpenAI Function Call Library" >
       
         <meta  property="og:description"  content="Enhancing OpenAI function calling with Pydantic" >
       
@@ -82,7 +82,7 @@
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Quick Start" >
+        <meta  name="twitter:title"  content="Function Calls - OpenAI Function Call Library" >
       
         <meta  name="twitter:description"  content="Enhancing OpenAI function calling with Pydantic" >
       
@@ -105,7 +105,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#openai-function-calls-quick-start-guide" class="md-skip">
+        <a href="#openai-function-call" class="md-skip">
           Skip to content
         </a>
       
@@ -140,7 +140,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quick Start
+              Function Calls
             
           </span>
         </div>
@@ -212,24 +212,12 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="." class="md-tabs__link md-tabs__link--active">
-      Quick Start
-    </a>
-  </li>
-
-      
-        
-  
-  
-
-
   
   
   
     <li class="md-tabs__item">
-      <a href="openai_schema/" class="md-tabs__link">
-        API Reference
+      <a href="." class="md-tabs__link md-tabs__link--active">
+        Introduction
       </a>
     </li>
   
@@ -256,11 +244,15 @@
   
 
 
-  <li class="md-tabs__item">
-    <a href="philosophy/" class="md-tabs__link">
-      Philosophy
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="openai_schema/" class="md-tabs__link">
+        API Reference
+      </a>
+    </li>
+  
 
       
     </ul>
@@ -322,6 +314,35 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+          Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -331,12 +352,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Quick Start
+          Function Calls
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="." class="md-nav__link md-nav__link--active">
-        Quick Start
+        Function Calls
       </a>
       
         
@@ -355,9 +376,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#structured-extraction-with-openai" class="md-nav__link">
+    Structured Extraction with openai
+  </a>
+  
+    <nav class="md-nav" aria-label="Structured Extraction with openai">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -403,8 +444,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    Next Steps
+  <a href="#ide-support" class="md-nav__link">
+    IDE Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openai-schema-and-pydantic" class="md-nav__link">
+    OpenAI Schema and Pydantic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
   </a>
   
 </li>
@@ -416,50 +471,6 @@
     </li>
   
 
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-      
-      
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-          API Reference
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          API Reference
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="openai_schema/" class="md-nav__link">
-        OpenAISchema
-      </a>
-    </li>
-  
-
             
           
             
@@ -468,36 +479,8 @@
   
   
     <li class="md-nav__item">
-      <a href="multitask/" class="md-nav__link">
-        MultiTask Schema
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="writing-prompts/" class="md-nav__link">
-        Introduction: Writing Prompts
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="chat-completion/" class="md-nav__link">
-        Prompting Templates
+      <a href="philosophy/" class="md-nav__link">
+        Philosophy
       </a>
     </li>
   
@@ -525,17 +508,17 @@
       
         
       
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
       
       
       
-        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           Use Cases
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Use Cases
         </label>
@@ -652,10 +635,88 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="philosophy/" class="md-nav__link">
-        Philosophy
+      <a href="openai_schema/" class="md-nav__link">
+        OpenAISchema
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="multitask/" class="md-nav__link">
+        MultiTask Schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="writing-prompts/" class="md-nav__link">
+        Introduction: Writing Prompts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="chat-completion/" class="md-nav__link">
+        Prompting Templates
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -687,9 +748,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#structured-extraction-with-openai" class="md-nav__link">
+    Structured Extraction with openai
+  </a>
+  
+    <nav class="md-nav" aria-label="Structured Extraction with openai">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -735,8 +816,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#next-steps" class="md-nav__link">
-    Next Steps
+  <a href="#ide-support" class="md-nav__link">
+    IDE Support
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openai-schema-and-pydantic" class="md-nav__link">
+    OpenAI Schema and Pydantic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
   </a>
   
 </li>
@@ -759,9 +854,22 @@
   
 
 
-<h1 id="openai-function-calls-quick-start-guide">OpenAI Function Calls Quick Start Guide</h1>
+<h1 id="openai-function-call">OpenAI Function Call</h1>
+<p><em>OpenAISchema, structured extraction in Python, powered by OpenAI, designed for simplicity, transparency, and control.</em></p>
+<hr />
+<p>This library is build to interact with openai's function call api from python code, with python objects. It's designed to be intuitive, easy to use, but give great visibily in how we call openai.</p>
+<p><strong>OpenAISchema</strong> is based on Python type annotations, and powered by Pydantic.</p>
+<p>The key features are:</p>
+<ul>
+<li><strong>Intuitive to write</strong>: Great support for editors, completions. Spend less time debugging.</li>
+<li><strong>Writing prompts as code</strong>: Collocate docstrings and descriptions as part of your prompting.</li>
+<li><strong>Extensible</strong>: Bring your own kitchen sink without being weighted down by abstractions.</li>
+</ul>
+<h2 id="structured-extraction-with-openai">Structured Extraction with <code>openai</code></h2>
 <p>Welcome to the Quick Start Guide for OpenAI Function Call. This guide will walk you through the installation process and provide examples demonstrating the usage of function calls and schemas with OpenAI and Pydantic.</p>
-<h2 id="installation">Installation</h2>
+<h3 id="requirements">Requirements</h3>
+<p>This library depends on <strong>Pydantic</strong> an <strong>OpenAI</strong> that's all.</p>
+<h3 id="installation">Installation</h3>
 <p>To get started with OpenAI Function Call, you need to install it using <code>pip</code>. Run the following command in your terminal:</p>
 <div class="admonition note requirement">
 <p class="admonition-title">Note</p>
@@ -863,10 +971,30 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>   <span class="c1"># Output: 30</span>
 </span></code></pre></div>
 <p>By calling <code>UserDetails.from_response</code>, we create an instance of the <code>UserDetails</code> class using the response from the API call. Subsequently, we can access the extracted user details through the <code>name</code> and <code>age</code> attributes of the <code>user</code> object.</p>
-<h2 id="next-steps">Next Steps</h2>
+<h2 id="ide-support">IDE Support</h2>
+<p>Everything is designed for you to get the best developer experience possible, with the best editor support.</p>
+<p>Including <strong>autocompletion</strong>:</p>
+<p><img alt="autocomplete" src="img/ide_support.png" /></p>
+<p>And even <strong>inline errors</strong></p>
+<p><img alt="errors" src="img/error2.png" /></p>
+<h2 id="openai-schema-and-pydantic">OpenAI Schema and Pydantic</h2>
 <p>This quick start guide provided you with a basic understanding of how to use OpenAI Function Call for schema extraction and function calls. You can now explore more advanced use cases and creative applications of this library.</p>
+<p>Since <code>UserDetails</code> is a <code>OpenAISchems</code> and a <code>pydantic.BaseModel</code> you can use inheritance and nesting to create more complex emails while avoiding code duplication</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span> <span class="nc">UserDetails</span><span class="p">(</span><span class="n">OpenAISchema</span><span class="p">):</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User&#39;s full name&quot;</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">class</span> <span class="nc">UserWithAddress</span><span class="p">(</span><span class="n">UserDetails</span><span class="p">):</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">address</span><span class="p">:</span> <span class="nb">str</span> 
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="k">class</span> <span class="nc">UserWithFriends</span><span class="p">(</span><span class="n">UserDetails</span><span class="p">):</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="n">best_friend</span><span class="p">:</span> <span class="n">UserDetail</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">friends</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">UserDetails</span><span class="p">]</span>
+</span></code></pre></div>
 <p>If you have any questions, feel free to leave an issue or reach out to the library's author on <a href="https://twitter.com/jxnlco">Twitter</a>. For a more comprehensive solution with additional features, consider checking out <a href="https://www.askmarvin.ai/">MarvinAI</a>.</p>
 <p>To see more examples of how we can create interesting models check out some <a href="examples/">examples.</a></p>
+<h2 id="license">License</h2>
+<p>This project is licensed under ther terms of the MIT License.</p>
 
 
   
@@ -891,13 +1019,13 @@
         
         
           
-          <a href="openai_schema/" class="md-footer__link md-footer__link--next" aria-label="Next: OpenAISchema" rel="next">
+          <a href="philosophy/" class="md-footer__link md-footer__link--next" aria-label="Next: Philosophy" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                OpenAISchema
+                Philosophy
               </div>
             </div>
             <div class="md-footer__button md-icon">
